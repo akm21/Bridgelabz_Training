@@ -1,0 +1,122 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > QuantityMeasurementApp2</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.bridgelabz.wipro.uc3_genericquantityclassfordryprinciple</a>
+</div>
+
+<h1>Coverage Summary for Class: QuantityMeasurementApp2 (com.bridgelabz.wipro.uc3_genericquantityclassfordryprinciple)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">QuantityMeasurementApp2</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (1/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    66.7%
+  </span>
+  <span class="absValue">
+    (8/12)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.bridgelabz.wipro.uc3_genericquantityclassfordryprinciple;
+&nbsp;
+<b class="nc">&nbsp;public class QuantityMeasurementApp2 {</b>
+&nbsp;
+&nbsp;        public static void main(String[] args) {
+&nbsp;
+<b class="fc">&nbsp;            com.bridgelabz.wipro.uc3_genericquantityclassfordryprinciple.QuantityLength q1 = new com.bridgelabz.wipro.uc3_genericquantityclassfordryprinciple.QuantityLength(1.0, com.bridgelabz.wipro.uc3_genericquantityclassfordryprinciple.LengthUnit.FEET);</b>
+<b class="fc">&nbsp;            com.bridgelabz.wipro.uc3_genericquantityclassfordryprinciple.QuantityLength q2 = new com.bridgelabz.wipro.uc3_genericquantityclassfordryprinciple.QuantityLength(12.0, com.bridgelabz.wipro.uc3_genericquantityclassfordryprinciple.LengthUnit.INCHES);</b>
+<b class="fc">&nbsp;            System.out.println(&quot;Input: Quantity (1.0, \&quot;feet\&quot;) and Quantity (12.0, \&quot;inches\&quot;)&quot;);</b>
+<b class="fc">&nbsp;            System.out.println(&quot;Output: Equal (&quot; + q1.equals(q2) + &quot;)&quot;);</b>
+<b class="nc">&nbsp;</b>
+<b class="fc">&nbsp;            com.bridgelabz.wipro.uc3_genericquantityclassfordryprinciple.QuantityLength q3 = new com.bridgelabz.wipro.uc3_genericquantityclassfordryprinciple.QuantityLength(1.0, com.bridgelabz.wipro.uc3_genericquantityclassfordryprinciple.LengthUnit.INCHES);</b>
+<b class="fc">&nbsp;            com.bridgelabz.wipro.uc3_genericquantityclassfordryprinciple.QuantityLength q4 = new QuantityLength(1.0, LengthUnit.INCHES);</b>
+<b class="nc">&nbsp;</b>
+<b class="fc">&nbsp;            System.out.println(&quot;Input: Quantity (1.0, \&quot;inch\&quot;) and Quantity (1.0, \&quot;inch\&quot;)&quot;);</b>
+<b class="fc">&nbsp;            System.out.println(&quot;Output: Equal (&quot; + q3.equals(q4) + &quot;)&quot;);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2026-02-19 18:09</div>
+</div>
+</body>
+</html>

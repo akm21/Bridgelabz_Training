@@ -1,0 +1,7 @@
+package com.bridgelabz.wipro.uc15_n_tierarchitecturerefactoringforquantitymeasrementapplication.repository;
+
+import com.bridgelabz.wipro.uc15_n_tierarchitecturerefactoringforquantitymeasrementapplication.entity.QuantityMeasurementEntity;
+
+public interface QuantityMeasurementWriteRepository {
+    void save(QuantityMeasurementEntity entity);
+}

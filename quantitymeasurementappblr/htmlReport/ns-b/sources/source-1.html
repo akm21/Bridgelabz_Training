@@ -1,0 +1,244 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Length</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.bridgelabz.wipro.uc6_additionoftwolengthunits</a>
+</div>
+
+<h1>Coverage Summary for Class: Length (com.bridgelabz.wipro.uc6_additionoftwolengthunits)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Length</td>
+<td class="coverageStat">
+  <span class="percent">
+    60%
+  </span>
+  <span class="absValue">
+    (6/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    42.9%
+  </span>
+  <span class="absValue">
+    (6/14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    64.5%
+  </span>
+  <span class="absValue">
+    (20/31)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">Length$LengthUnit</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (8/8)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    71.4%
+  </span>
+  <span class="absValue">
+    (10/14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    42.9%
+  </span>
+  <span class="absValue">
+    (6/14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    71.8%
+  </span>
+  <span class="absValue">
+    (28/39)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.bridgelabz.wipro.uc6_additionoftwolengthunits;
+&nbsp;
+&nbsp;public class Length {
+&nbsp;
+&nbsp;    private static final double ABS_EPS_IN = 5e-5;
+&nbsp;    private static final double REL_EPS = 1e-9;
+&nbsp;
+&nbsp;    private double value;
+&nbsp;    private LengthUnit unit;
+&nbsp;
+<b class="fc">&nbsp;    public Length(double value, LengthUnit unit) {</b>
+<b class="fc">&nbsp;        this.value = value;</b>
+<b class="fc">&nbsp;        this.unit = unit;</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public enum LengthUnit {</b>
+<b class="fc">&nbsp;        FEET(12.0),</b>
+<b class="fc">&nbsp;        INCHES(1.0),</b>
+<b class="fc">&nbsp;        YARDS(36.0),</b>
+<b class="fc">&nbsp;        CENTIMETERS(1.0 / 2.54);</b>
+&nbsp;
+&nbsp;        private final double toInchesFactor;
+&nbsp;
+<b class="fc">&nbsp;        LengthUnit(double toInchesFactor) {</b>
+<b class="fc">&nbsp;            this.toInchesFactor = toInchesFactor;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public double toInches(double v) {
+<b class="fc">&nbsp;            return v * toInchesFactor;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public double toBaseInches() {
+<b class="fc">&nbsp;        return unit.toInches(value);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static boolean almostEqual(double a, double b) {
+<b class="fc">&nbsp;        double diff = Math.abs(a - b);</b>
+<b class="fc">&nbsp;        double scale = Math.max(1.0, Math.max(Math.abs(a), Math.abs(b)));</b>
+<b class="fc">&nbsp;        double tol = Math.max(ABS_EPS_IN, REL_EPS * scale);</b>
+<b class="pc">&nbsp;        return diff &lt;= tol;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean compare(Length that) {
+<b class="fc">&nbsp;        return almostEqual(this.toBaseInches(), that.toBaseInches());</b>
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean equals(Object o) {
+<b class="pc">&nbsp;        if (this == o)</b>
+<b class="nc">&nbsp;            return true;</b>
+<b class="pc">&nbsp;        if (o == null || getClass() != o.getClass())</b>
+<b class="nc">&nbsp;            return false;</b>
+<b class="fc">&nbsp;        Length that = (Length) o;</b>
+<b class="fc">&nbsp;        return compare(that);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int hashCode() {
+<b class="nc">&nbsp;        double quantized = Math.round(this.toBaseInches() / ABS_EPS_IN) * ABS_EPS_IN;</b>
+<b class="nc">&nbsp;        return Double.hashCode(quantized);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Length convertTo(LengthUnit targetUnit) {
+<b class="nc">&nbsp;        if (targetUnit == null)</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;target unit cannot be null&quot;);</b>
+<b class="nc">&nbsp;        double valueInInches = this.toBaseInches();</b>
+<b class="nc">&nbsp;        double convertedValue = targetUnit.toInches(1.0) == 0 ? 0 : valueInInches / targetUnit.toInches(1.0);</b>
+<b class="nc">&nbsp;        return new Length(convertedValue, targetUnit);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Length add(Length thatLength) {
+<b class="fc">&nbsp;        if (thatLength == null) {</b>
+<b class="fc">&nbsp;            throw new IllegalArgumentException(&quot;Length cannot be null&quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        double length1 = thatLength.toBaseInches();</b>
+<b class="fc">&nbsp;        double length2 = this.toBaseInches();</b>
+<b class="fc">&nbsp;        double sumlength = length1 + length2;</b>
+<b class="fc">&nbsp;        double sumlengthbaseunit = sumlength / this.unit.toInchesFactor;</b>
+<b class="fc">&nbsp;        return new Length(sumlengthbaseunit, this.unit);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private double convertFromBaseToTargetUnit(double lengthInInches, LengthUnit targetUnit) {
+<b class="nc">&nbsp;        return lengthInInches / targetUnit.toInchesFactor;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String toString() {
+<b class="nc">&nbsp;        return &quot;Length{ &quot; + &quot;value: &quot; + value + &quot;, unit: &quot; + unit + &quot;}&quot;;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2026-02-19 18:09</div>
+</div>
+</body>
+</html>

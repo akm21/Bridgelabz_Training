@@ -1,0 +1,4 @@
+package com.bridgelabz.wipro.uc16_databaseintegrationwithjdbcforquantitymeasurementpersistence.repository;
+
+public interface IQuantityMeasurementRepository extends QuantityMeasurementReadRepository, QuantityMeasurementWriteRepository {
+}

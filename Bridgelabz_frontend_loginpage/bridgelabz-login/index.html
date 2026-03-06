@@ -1,0 +1,527 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bridgelabz – Login</title>
+    <style>
+        :root {
+            --bg: #f6f8fb;
+            --card: #ffffff;
+            --text: #0f172a;
+            --muted: #64748b;
+            --border: #e5e7eb;
+            --shadow: 0 10px 30px rgba(16, 24, 40, .08), 0 6px 12px rgba(16, 24, 40, .06);
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --primary-foreground: #ffffff;
+            --error: #dc2626;
+            --error-bg: #fee2e2;
+            --success: #10b981;
+            --success-bg: #ecfdf5;
+            --radius: 14px;
+            --input-radius: 8px;
+            --focus: 0 0 0 3px rgba(37, 99, 235, .35);
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        html,
+        body {
+            height: 100%
+        }
+
+        body {
+            margin: 0;
+            font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans";
+            color: var(--text);
+            background: var(--bg);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .brand-top {
+            position: fixed;
+            top: 26px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-weight: 700;
+            letter-spacing: .2px;
+            color: #0b1220;
+        }
+
+        .center-wrap {
+            min-height: 100%;
+            display: grid;
+            place-items: center;
+            padding: 42px 16px;
+        }
+
+        .card {
+            width: 380px;
+            max-width: 94vw;
+            background: var(--card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 28px 26px 18px;
+        }
+
+        .login-card .brand {
+            text-align: center;
+            font-size: 22px;
+            margin: 4px 0 4px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: var(--muted);
+            margin: 0 0 18px;
+            font-size: 13px;
+        }
+
+        .alert {
+            display: flex;
+            gap: 12px;
+            padding: 12px;
+            border-radius: 10px;
+            margin: 6px 0 16px;
+            border: 1px solid;
+        }
+
+        .alert-error {
+            background: var(--error-bg);
+            border-color: #fecaca;
+        }
+
+        .alert-icon {
+            display: flex;
+            align-items: flex-start
+        }
+
+        .alert-text {
+            font-size: 13px;
+            line-height: 1.25
+        }
+
+        .alert-text strong {
+            display: block;
+            margin-bottom: 4px;
+            color: #991b1b
+        }
+
+        .form-row {
+            margin-bottom: 14px
+        }
+
+        label {
+            display: block;
+            font-size: 13px;
+            margin-bottom: 8px;
+            color: #0b1220
+        }
+
+        .input-wrap {
+            position: relative;
+        }
+
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            border: 1px solid var(--border);
+            border-radius: var(--input-radius);
+            padding: 12px 42px 12px 12px;
+            line-height: 1.2;
+            outline: none;
+            background: #fff;
+            color: #0f172a;
+            transition: border .15s ease, box-shadow .15s ease;
+        }
+
+        input::placeholder {
+            color: #94a3b8
+        }
+
+        input:focus {
+            border-color: var(--primary);
+            box-shadow: var(--focus);
+        }
+
+        .field-status {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0;
+            transition: opacity .15s ease;
+        }
+
+        .input-wrap.invalid input {
+            border-color: var(--error);
+            box-shadow: 0 0 0 3px rgba(220, 38, 38, .15);
+        }
+
+        .input-wrap.invalid .field-status {
+            opacity: 1
+        }
+
+        .field-hint {
+            margin: 6px 2px 0;
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        .error-msg {
+            color: var(--error);
+            min-height: 16px;
+        }
+
+        .between {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .row-inline {
+            display: flex;
+            align-items: center;
+        }
+
+        .checkbox {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            color: #0b1220;
+        }
+
+        .checkbox input {
+            width: 16px;
+            height: 16px;
+            accent-color: var(--primary);
+        }
+
+        .muted-link {
+            text-decoration: none;
+            color: #64748b;
+            font-size: 12.5px;
+        }
+
+        .muted-link:hover {
+            text-decoration: underline;
+        }
+
+        .btn {
+            width: 100%;
+            border: 0;
+            border-radius: 10px;
+            padding: 12px 14px;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: var(--primary-foreground);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-hover);
+        }
+
+        .btn[disabled] {
+            opacity: .7;
+            cursor: not-allowed;
+        }
+
+        .btn-spinner {
+            --size: 18px;
+            width: var(--size);
+            height: var(--size);
+            border: 2px solid rgba(255, 255, 255, .55);
+            border-top-color: #fff;
+            border-radius: 50%;
+            animation: spin .9s linear infinite;
+            margin-left: 8px;
+            display: none;
+        }
+
+        .btn.loading .btn-spinner {
+            display: inline-block;
+        }
+
+        .btn.loading .btn-text {
+            opacity: .9;
+        }
+
+        .footer-note {
+            text-align: center;
+            margin-top: 6px;
+            color: #666;
+            font-size: 12.5px;
+        }
+
+        .success-wrap {
+            text-align: center;
+            margin-top: -20px;
+        }
+
+        .brand-top-inline {
+            margin-bottom: 44px;
+            font-weight: 700;
+        }
+
+        .success-icon {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 18px;
+        }
+
+        .success-title {
+            margin: 2px 0 6px;
+            font-size: 28px;
+            letter-spacing: .2px;
+        }
+
+        .success-sub {
+            margin: 0 0 18px;
+            color: #6b7280;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .spinner {
+            --size: 18px;
+            width: var(--size);
+            height: var(--size);
+            margin: 16px auto 0;
+            border-radius: 50%;
+            border: 3px solid #e5e7eb;
+            border-top-color: #6366f1;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @media (max-width: 420px) {
+            .card {
+                padding: 24px 18px 16px;
+            }
+
+            .brand-top {
+                top: 18px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="brand-top" aria-hidden="true">Bridgelabz</header>
+
+    <!-- LOGIN VIEW -->
+    <main id="login-view" class="center-wrap" aria-live="polite">
+        <section class="card login-card">
+            <h1 class="brand">Bridgelabz</h1>
+            <p class="subtitle">Log in to your account</p>
+
+            <div id="authError" class="alert alert-error hidden" role="alert">
+                <div class="alert-icon" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="12" r="10" fill="#FEE2E2" />
+                        <path d="M12 7v6" stroke="#DC2626" stroke-width="2" stroke-linecap="round" />
+                        <circle cx="12" cy="16.5" r="1.25" fill="#DC2626" />
+                    </svg>
+                </div>
+                <div class="alert-text">
+                    <strong>Authentication failed</strong>
+                    There was a problem with your login credentials. Please try again.
+                </div>
+            </div>
+
+            <form id="loginForm" novalidate>
+                <div class="form-row">
+                    <label for="email">Email address</label>
+                    <div class="input-wrap">
+                        <input type="email" id="email" name="email" inputmode="email" autocomplete="username"
+                            placeholder="Enter your email" aria-describedby="emailHelp" aria-invalid="false" required />
+                        <span class="field-status" aria-hidden="true">
+                            <svg width="18" height="18" viewBox="0 0 24 24">
+                                <circle cx="12" cy="12" r="10" fill="#FEE2E2" />
+                                <path d="M12 7v6" stroke="#DC2626" stroke-width="2" stroke-linecap="round" />
+                                <circle cx="12" cy="16.5" r="1.25" fill="#DC2626" />
+                            </svg>
+                        </span>
+                    </div>
+                    <p id="emailHelp" class="field-hint error-msg" role="alert"></p>
+                </div>
+
+                <div class="form-row">
+                    <div class="between">
+                        <label for="password">Password</label>
+                        #Forgot password?</a>
+                    </div>
+                    <div class="input-wrap">
+                        <input type="password" id="password" name="password" autocomplete="current-password"
+                            placeholder="********" aria-describedby="passwordHelp" aria-invalid="false" required />
+                        <span class="field-status" aria-hidden="true">
+                            <svg width="18" height="18" viewBox="0 0 24 24">
+                                <circle cx="12" cy="12" r="10" fill="#FEE2E2" />
+                                <path d="M12 7v6" stroke="#DC2626" stroke-width="2" stroke-linecap="round" />
+                                <circle cx="12" cy="16.5" r="1.25" fill="#DC2626" />
+                            </svg>
+                        </span>
+                    </div>
+                    <p id="passwordHelp" class="field-hint error-msg" role="alert"></p>
+                </div>
+
+                <div class="form-row row-inline">
+                    <label class="checkbox">
+                        <input id="remember" type="checkbox" />
+                        <span>Remember me for 30 days</span>
+                    </label>
+                </div>
+
+                <div class="form-row">
+                    <button id="submitBtn" type="submit" class="btn btn-primary">
+                        <span class="btn-text">Sign In</span>
+                        <span class="btn-spinner" aria-hidden="true"></span>
+                    </button>
+                </div>
+
+                <p class="footer-note">
+                    Don’t have an account?
+                    #Create an account</a>
+                </p>
+            </form>
+        </section>
+    </main>
+
+    <!-- SUCCESS VIEW -->
+    <main id="success-view" class="center-wrap hidden" aria-live="polite">
+        <section class="success-wrap">
+            <h2 class="brand-top-inline">Bridgelabz</h2>
+            <div class="success-icon" aria-hidden="true">
+                <svg width="92" height="92" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="60" cy="60" r="42" fill="#ECFDF5" />
+                    <path d="M44 62l11 11 22-26" fill="none" stroke="#10B981" stroke-width="8" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+            </div>
+            <h1 class="success-title">Login Successful!</h1>
+            <p class="success-sub">
+                Welcome to Bridgelabz. You are<br />
+                being redirected to your dashboard.
+            </p>
+            <div class="spinner" aria-label="Loading"></div>
+        </section>
+    </main>
+
+    <script>
+        // --- Demo credentials for "success" path ---
+        const VALID_EMAIL = "user@bridgelabz.com";
+        const VALID_PASSWORD = "Passw0rd!";
+
+        const loginView = document.getElementById("login-view");
+        const successView = document.getElementById("success-view");
+        const form = document.getElementById("loginForm");
+        const email = document.getElementById("email");
+        const password = document.getElementById("password");
+        const remember = document.getElementById("remember");
+        const authError = document.getElementById("authError");
+        const submitBtn = document.getElementById("submitBtn");
+        const emailHelp = document.getElementById("emailHelp");
+        const passwordHelp = document.getElementById("passwordHelp");
+
+        // Prefill from localStorage if present
+        (function prefill() {
+            const savedEmail = localStorage.getItem("blz_saved_email");
+            if (savedEmail) {
+                email.value = savedEmail;
+                remember.checked = true;
+            }
+        })();
+
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+
+        function setInvalid(el, message) {
+            el.closest(".input-wrap").classList.add("invalid");
+            el.setAttribute("aria-invalid", "true");
+            (el.id === "email" ? emailHelp : passwordHelp).textContent = message || "";
+        }
+        function clearInvalid(el) {
+            el.closest(".input-wrap").classList.remove("invalid");
+            el.setAttribute("aria-invalid", "false");
+            (el.id === "email" ? emailHelp : passwordHelp).textContent = "";
+        }
+        function showAuthError(show) { authError.classList.toggle("hidden", !show); }
+        function startLoading() { submitBtn.classList.add("loading"); submitBtn.disabled = true; }
+        function stopLoading() { submitBtn.classList.remove("loading"); submitBtn.disabled = false; }
+
+        [email, password].forEach(el => {
+            el.addEventListener("input", () => { clearInvalid(el); showAuthError(false); });
+        });
+
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            showAuthError(false);
+
+            const emailVal = email.value.trim().replace(/\u00A0/g, '');
+            const passVal = password.value;
+
+            let hasError = false;
+            if (!emailVal || !emailPattern.test(emailVal)) {
+                setInvalid(email, "Please enter a valid email");
+                hasError = true;
+            }
+            if (!passVal) {
+                setInvalid(password, "Password is required");
+                hasError = true;
+            }
+            if (hasError) return;
+
+            // Remember me
+            if (remember.checked) localStorage.setItem("blz_saved_email", emailVal);
+            else localStorage.removeItem("blz_saved_email");
+
+            startLoading();
+            // Simulate server delay
+            await new Promise(r => setTimeout(r, 900));
+
+            const ok = emailVal.toLowerCase() === VALID_EMAIL && passVal === VALID_PASSWORD;
+            stopLoading();
+
+            if (!ok) {
+                // show “Authentication failed” banner + red rings
+                showAuthError(true);
+                setInvalid(email, "");
+                setInvalid(password, "");
+                return;
+            }
+
+            // Success screen + auto-redirect
+            loginView.classList.add("hidden");
+            successView.classList.remove("hidden");
+            setTimeout(() => {
+                // Replace with your real dashboard
+                window.location.href = "#dashboard";
+            }, 1800);
+        });
+    </script>
+</body>
+
+</html>

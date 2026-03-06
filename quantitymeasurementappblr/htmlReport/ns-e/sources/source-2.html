@@ -1,0 +1,215 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Weight</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.bridgelabz.wipro.uc9_weightmeasurement</a>
+</div>
+
+<h1>Coverage Summary for Class: Weight (com.bridgelabz.wipro.uc9_weightmeasurement)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Weight</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    64.3%
+  </span>
+  <span class="absValue">
+    (9/14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    56.7%
+  </span>
+  <span class="absValue">
+    (17/30)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    67.9%
+  </span>
+  <span class="absValue">
+    (36/53)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.bridgelabz.wipro.uc9_weightmeasurement;
+&nbsp;
+&nbsp;public class Weight {
+&nbsp;    private static final double ABS_EPS_IN=5e-5;
+&nbsp;    private static final double REL_EPS=1e-9;
+&nbsp;
+&nbsp;    private double value;
+&nbsp;    private WeightUnit unit;
+&nbsp;
+<b class="fc">&nbsp;    public Weight(double value, WeightUnit unit) {</b>
+<b class="pc">&nbsp;        if(!Double.isFinite(value))</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Value must not be null&quot;);</b>
+<b class="fc">&nbsp;        if(unit==null)</b>
+<b class="fc">&nbsp;            throw new IllegalArgumentException(&quot;Unit cannot be null&quot;);</b>
+<b class="fc">&nbsp;        this.value = value;</b>
+<b class="fc">&nbsp;        this.unit = unit;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public double getValue() {
+<b class="nc">&nbsp;        return value;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public WeightUnit getUnit() {
+<b class="nc">&nbsp;        return unit;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public double toBaseGram(){
+<b class="fc">&nbsp;        return unit.convertToBaseUnit(value);</b>
+&nbsp;    }
+&nbsp;    private static boolean almostEqual(double a,double b){
+<b class="fc">&nbsp;        double diff=Math.abs(a-b);</b>
+<b class="fc">&nbsp;        double scale=Math.max(1.0,Math.max(Math.abs(a),Math.abs(b)));</b>
+<b class="fc">&nbsp;        double toll=Math.max(ABS_EPS_IN,REL_EPS*scale);</b>
+<b class="fc">&nbsp;        return diff&lt;=toll;</b>
+&nbsp;    }
+&nbsp;    public boolean compare(Weight that){
+<b class="fc">&nbsp;        return almostEqual(this.toBaseGram(),that.toBaseGram());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean equals(Object obj) {
+<b class="fc">&nbsp;        if(this==obj)</b>
+<b class="fc">&nbsp;           return true;</b>
+<b class="fc">&nbsp;        if(obj==null||getClass()!=obj.getClass())</b>
+<b class="fc">&nbsp;            return false;</b>
+<b class="fc">&nbsp;        Weight that= (Weight) obj;</b>
+<b class="fc">&nbsp;        return compare(that);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int hashCode() {
+<b class="nc">&nbsp;        double quantized=Math.round(this.toBaseGram()/ABS_EPS_IN)*ABS_EPS_IN;</b>
+<b class="nc">&nbsp;        return Double.hashCode(quantized);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String toString() {
+<b class="nc">&nbsp;        return &quot;Weight{  value: &quot; + value + &quot;, unit: &quot; + unit + &quot;}&quot;;</b>
+&nbsp;    }
+&nbsp;    public Weight convertTo(WeightUnit targetUnit){
+<b class="pc">&nbsp;        if(targetUnit==null)</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Target unit cannot be null&quot;);</b>
+<b class="fc">&nbsp;        double valueInGrams=this.toBaseGram();</b>
+<b class="pc">&nbsp;        double convertedValue= targetUnit.convertToBaseUnit(1.0)==0 ? 0 : valueInGrams/ targetUnit.convertToBaseUnit(1.0);</b>
+<b class="fc">&nbsp;        return new Weight(convertedValue,targetUnit);</b>
+&nbsp;    }
+&nbsp;    public Weight convertTo(double value,WeightUnit fromUnit,WeightUnit toUnit){
+<b class="nc">&nbsp;        if(!Double.isFinite(value))</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Value cannot be null&quot;);</b>
+<b class="nc">&nbsp;        if(fromUnit==null||toUnit==null)</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Units cannot be null&quot;);</b>
+<b class="nc">&nbsp;        double valueInGrams= fromUnit.convertToBaseUnit(value);</b>
+<b class="nc">&nbsp;        double convertedValue=valueInGrams/toUnit.getToGramFactor();</b>
+<b class="nc">&nbsp;        return new Weight(convertedValue,toUnit);</b>
+&nbsp;    }
+&nbsp;    public Weight Add(Weight thatWeight){
+<b class="pc">&nbsp;        if(thatWeight==null)</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Weight cannot be null&quot;);</b>
+<b class="fc">&nbsp;        double weight1=thatWeight.toBaseGram();</b>
+<b class="fc">&nbsp;        double weight2=this.toBaseGram();</b>
+<b class="fc">&nbsp;        double sumweight=weight1+weight2;</b>
+<b class="fc">&nbsp;        double sumweightbaseunit=sumweight/this.unit.getToGramFactor();</b>
+<b class="fc">&nbsp;        return new Weight(sumweightbaseunit,this.unit);</b>
+&nbsp;    }
+&nbsp;    private static double convertFromBasetoTargetUnit(double weightInGrams,WeightUnit targetUnit){
+<b class="fc">&nbsp;        return weightInGrams/targetUnit.getToGramFactor();</b>
+&nbsp;    }
+&nbsp;    public static Weight Add(Weight weight1, Weight weight2, WeightUnit targetUnit){
+<b class="pc">&nbsp;        if(weight1==null||weight2==null)</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Weight cannot be null&quot;);</b>
+<b class="pc">&nbsp;        if(targetUnit==null)</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Target Unit cannot be null&quot;);</b>
+<b class="fc">&nbsp;        double newweight1=weight1.toBaseGram();</b>
+<b class="fc">&nbsp;        double newweight2=weight2.toBaseGram();</b>
+<b class="fc">&nbsp;        double sumweight=newweight1+newweight2;</b>
+<b class="fc">&nbsp;        double sumweightbaseunit=convertFromBasetoTargetUnit(sumweight,targetUnit);</b>
+<b class="fc">&nbsp;        return new Weight(sumweightbaseunit,targetUnit);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2026-02-19 18:09</div>
+</div>
+</body>
+</html>

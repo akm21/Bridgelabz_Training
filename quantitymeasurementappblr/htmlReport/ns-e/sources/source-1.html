@@ -1,0 +1,163 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > QuantityMeasurementApp</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.bridgelabz.wipro.uc9_weightmeasurement</a>
+</div>
+
+<h1>Coverage Summary for Class: QuantityMeasurementApp (com.bridgelabz.wipro.uc9_weightmeasurement)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">QuantityMeasurementApp</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (4/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    13.8%
+  </span>
+  <span class="absValue">
+    (4/29)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.bridgelabz.wipro.uc9_weightmeasurement;
+&nbsp;
+&nbsp;import com.bridgelabz.wipro.uc8_refactoringunitenumtostandalone.Length;
+&nbsp;import com.bridgelabz.wipro.uc8_refactoringunitenumtostandalone.LengthUnit;
+&nbsp;
+<b class="nc">&nbsp;public class QuantityMeasurementApp {</b>
+&nbsp;    public static boolean demonstrateWeightEquality(Weight weight1,Weight weight2){
+<b class="fc">&nbsp;        return weight1.equals(weight2);</b>
+&nbsp;    }
+&nbsp;    public static boolean demonstrateWeightComparison(double value1,WeightUnit unit1,double value2,WeightUnit unit2){
+<b class="nc">&nbsp;        Weight weight1=new Weight(value1,unit1);</b>
+<b class="nc">&nbsp;        Weight weight2=new Weight(value2,unit2);</b>
+<b class="nc">&nbsp;        return weight1.compare(weight2);</b>
+&nbsp;    }
+&nbsp;    public Weight demonstrateWeightConversion(double value,WeightUnit fromUnit,WeightUnit toUnit){
+<b class="nc">&nbsp;        Weight weight=new Weight(value,fromUnit);</b>
+<b class="nc">&nbsp;        return weight.convertTo(value,fromUnit,toUnit);</b>
+&nbsp;    }
+&nbsp;    public static Weight demonstrateWeightConversion(Weight weight,WeightUnit toUnit){
+<b class="fc">&nbsp;        return weight.convertTo(toUnit);</b>
+&nbsp;    }
+&nbsp;    public static Weight demonstrateWeightAddition(Weight weight1,Weight weight2){
+<b class="fc">&nbsp;        return weight1.Add(weight2);</b>
+&nbsp;    }
+&nbsp;    public static Weight demonstrateWeightAddition(Weight weight1,Weight weight2,WeightUnit targetUnit){
+<b class="fc">&nbsp;        return Weight.Add(weight1,weight2,targetUnit);</b>
+&nbsp;    }
+&nbsp;    public static void main(String[] args){
+&nbsp;        //Equality Comparison      1000.0/453.592
+<b class="nc">&nbsp;        System.out.println(&quot;Weigth(1.0,KILOGRAM).equals(Weight(1.0,KILOGRAM)) &quot;+demonstrateWeightEquality(new Weight(1.0,WeightUnit.KILOGRAM),new Weight(1.0,WeightUnit.KILOGRAM)));</b>
+<b class="nc">&nbsp;        System.out.println(&quot;Weight(1.0,KILOGRAM).equals(Weight(1000.0,GRAM)) &quot;+demonstrateWeightEquality(new Weight(1.0,WeightUnit.KILOGRAM),new Weight(1000,WeightUnit.GRAM)));</b>
+<b class="nc">&nbsp;        System.out.println(&quot;Weight(2.0,POUND).equals(Weight(2.0,POUND)) &quot;+demonstrateWeightEquality(new Weight(2.0,WeightUnit.POUND),new Weight(2.0,WeightUnit.POUND)));</b>
+<b class="nc">&nbsp;        System.out.println(&quot;Weight(1.0,KILOGRAM).equals(Weight(~2.20462,POUND)) &quot;+demonstrateWeightEquality(new Weight(1.0,WeightUnit.KILOGRAM),new Weight(1000.0/453.592,WeightUnit.POUND)));</b>
+<b class="nc">&nbsp;        System.out.println(&quot;Weight(500.0,GRAM).equals(Weight(0.5,KILOGRAM)) &quot;+demonstrateWeightEquality(new Weight(500.0,WeightUnit.GRAM),new Weight(0.5,WeightUnit.KILOGRAM)));</b>
+<b class="nc">&nbsp;        System.out.println(&quot;Weight(1.0,POUND).equals(Weight(453.592,GRAM)) &quot;+demonstrateWeightEquality(new Weight(1.0,WeightUnit.POUND),new Weight(453.592,WeightUnit.GRAM)));</b>
+&nbsp;
+&nbsp;        //Unit Conversion
+<b class="nc">&nbsp;        System.out.println(&quot;Weight(1.0,KILOGRAM).convertTo(GRAM) &quot;+demonstrateWeightConversion(new Weight(1.0,WeightUnit.KILOGRAM),WeightUnit.GRAM));</b>
+<b class="nc">&nbsp;        System.out.println(&quot;Weight(2.0,POUND).convertTo(KILOGRAM) &quot;+demonstrateWeightConversion(new Weight(2.0,WeightUnit.POUND),WeightUnit.KILOGRAM));</b>
+<b class="nc">&nbsp;        System.out.println(&quot;Weight(500.0,GRAM).convertTo(POUND) &quot;+demonstrateWeightConversion(new Weight(500.0,WeightUnit.GRAM),WeightUnit.POUND));</b>
+<b class="nc">&nbsp;        System.out.println(&quot;Weight(0.0,KILOGRAM).convertTo(GRAM) &quot;+demonstrateWeightConversion(new Weight(0.0,WeightUnit.KILOGRAM),WeightUnit.GRAM));</b>
+&nbsp;
+&nbsp;        //Addition Operation(Implicit Target Unit)
+<b class="nc">&nbsp;        System.out.println(&quot;Weight(1.0,KILOGRAM).add(Weight(2.0,KILOGRAM)) &quot;+demonstrateWeightAddition(new Weight(1.0,WeightUnit.KILOGRAM),new Weight(2.0,WeightUnit.KILOGRAM)));</b>
+<b class="nc">&nbsp;        System.out.println(&quot;Weight(1.0,KILOGRAM).add(Weight(1000.0,GRAM)) &quot;+demonstrateWeightAddition(new Weight(1.0,WeightUnit.KILOGRAM),new Weight(1000.0,WeightUnit.GRAM)));</b>
+<b class="nc">&nbsp;        System.out.println(&quot;Weight(500.0,GRAM).add(Weight(0.5,KILOGRAM)) &quot;+demonstrateWeightAddition(new Weight(500.0,WeightUnit.GRAM),new Weight(0.5,WeightUnit.KILOGRAM)));</b>
+&nbsp;
+&nbsp;        //Addition Operation(Explicit Target Unit)
+<b class="nc">&nbsp;        System.out.println(&quot;Weight(1.0,KILOGRAM).add(Weight(1000.0,GRAM),GRAM) &quot;+demonstrateWeightAddition(new Weight(1.0,WeightUnit.KILOGRAM),new Weight(1000.0,WeightUnit.GRAM),WeightUnit.GRAM));</b>
+<b class="nc">&nbsp;        System.out.println(&quot;Weight(1.0,POUND).add(Weight(453.592,GRAM),POUND) &quot;+demonstrateWeightAddition(new Weight(1.0,WeightUnit.POUND),new Weight(453.592,WeightUnit.GRAM),WeightUnit.POUND));</b>
+<b class="nc">&nbsp;        System.out.println(&quot;Weight(2.0,KILOGRAM).add(Weight(4.0,POUND),KILOGRAM) &quot;+demonstrateWeightAddition(new Weight(2.0,WeightUnit.KILOGRAM),new Weight(4.0,WeightUnit.POUND),WeightUnit.KILOGRAM));</b>
+&nbsp;
+&nbsp;        //Category Incompatibility
+<b class="nc">&nbsp;        Weight weight=new Weight(1.0,WeightUnit.KILOGRAM);</b>
+<b class="nc">&nbsp;        Length length=new Length(1.0,LengthUnit.FEET);</b>
+<b class="nc">&nbsp;        System.out.println(&quot;Weight(1.0,KILOGRAM).equals(Weight(1.0,FOOT)) &quot;+weight.equals(length));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2026-02-19 18:09</div>
+</div>
+</body>
+</html>
